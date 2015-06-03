@@ -41,7 +41,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-target/
-target/m2e-jee/web-resources/META-INF/maven/WeChat/WeChat/pom.xml
-target/m2e-jee/web-resources/META-INF/maven/WeChat/WeChat/pom.xml
-target/m2e-jee/web-resources/META-INF/maven/WeChat/WeChat/pom.properties
+target
+.classpath
+.mymetadata
+.project
+.settings
