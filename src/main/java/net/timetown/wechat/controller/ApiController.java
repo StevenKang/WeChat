@@ -32,7 +32,7 @@ public class ApiController {
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
 	public String get(String signature, String echostr, String timestamp, String nonce, HttpServletRequest request) {
-		
+		System.out.println("GET");
 		try {
 			// 验证消息真实性
 			if (Util.checkSignature(signature, "token", timestamp, nonce)) {
@@ -47,7 +47,7 @@ public class ApiController {
 	@RequestMapping(method = RequestMethod.POST)
 	public void post(String signature, String echostr, String timestamp, String nonce, 
 			HttpServletRequest request, HttpServletResponse response) {
-		
+		System.out.println("POST");
 		// 验证消息真实性
 		if (Util.checkSignature(signature, "token", timestamp, nonce)) {
 			try {
