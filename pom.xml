@@ -2,8 +2,8 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>weixin</groupId>
-  <artifactId>weixin</artifactId>
+  <groupId>net.timetown</groupId>
+  <artifactId>wechat</artifactId>
   <packaging>war</packaging>
   <name></name>
   <description></description>
@@ -150,18 +150,19 @@
 	</dependency>
   </dependencies>
   <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-    </plugins>
+  	<plugins>
+  		<!-- 编译插件 -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.1</version>
+			<configuration>
+				<encoding>UTF-8</encoding>
+				<source>1.7</source>
+				<target>1.7</target>
+			</configuration>
+		</plugin>
+  	</plugins>
   </build>
-  <version>1.1.11</version>
+  <version>2.2.1</version>
 </project>
