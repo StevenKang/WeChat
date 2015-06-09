@@ -3,8 +3,15 @@ package net.timetown.wechat.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.util.StringUtils;
 
 public class Util {
 
@@ -62,5 +69,59 @@ public class Util {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	// JS-SDK签名算法
+	public static String jsSign(Map<String, String> params) {
+		try {
+            if (params == null || params.size() == 0) return null;
+            
+            // 获取key
+            List<String> keys = new ArrayList<String>(params.keySet());
+            
+            // 对key键值按字典升序排序  
+            Collections.sort(keys);
+            
+            // 拼接字符串
+            String stringA = new String();
+            for (String key: keys) {
+            	String val = params.get(key);
+                if (val != null && !val.trim().equals(""))
+                        stringA += key+"="+val+"&";
+            }
+            String stringSignTemp = stringA.substring(0, stringA.length()-1);
+            
+            String sign= sha1(stringSignTemp);
+            return sign;
+	    } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	    }
+	}
+	
+	public static String sign(Map<String, String> params, String signKey) {
+        try {
+                if (params == null || params.size() == 0) return null;
+                
+                // 获取key
+                List<String> keys = new ArrayList<String>(params.keySet());
+                
+                // 对key键值按字典升序排序  
+                Collections.sort(keys);
+                
+                // 拼接字符串
+                String stringA = new String();
+                for (String key: keys) {
+                	String val = params.get(key);
+                    if (val != null && !val.trim().equals(""))
+                            stringA += key+"="+val;
+                }
+                String stringSignTemp = stringA + "key=" + signKey;
+                String sign= DigestUtils.md5Hex(stringSignTemp.getBytes("utf-8")).toUpperCase();
+                return sign;
+        } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+        }
 	}
 }
