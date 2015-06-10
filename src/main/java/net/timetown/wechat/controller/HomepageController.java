@@ -1,15 +1,10 @@
 package net.timetown.wechat.controller;
 
-
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import net.timetown.wechat.service.WeChatService;
@@ -17,7 +12,6 @@ import net.timetown.wechat.util.Util;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
