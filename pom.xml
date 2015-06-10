@@ -162,6 +162,12 @@
 	    <artifactId>httpclient</artifactId>
 	    <version>4.5</version>
 	</dependency>
+	<!-- mysql -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.35</version>
+	</dependency>
 	
   </dependencies>
   <build>

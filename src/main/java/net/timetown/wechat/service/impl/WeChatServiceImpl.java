@@ -1,10 +1,12 @@
 package net.timetown.wechat.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.timetown.wechat.service.WeChatService;
 import net.timetown.wechat.util.HttpUtil;
+import net.timetown.wechat.util.MySQLHelper;
 import net.timetown.wechat.wxbean.Message;
 import net.timetown.wechat.wxbean.MessageNews;
 import net.timetown.wechat.wxbean.MessageText;
@@ -25,6 +27,8 @@ public class WeChatServiceImpl implements WeChatService {
 	private static Map<String, String> jsapiTicketCache;
 	// jsapi_ticket 有效时间
 	private static Map<String, Long> jsapiTicketExpires;
+	
+	private MySQLHelper mysql = MySQLHelper.get();
 	
 	static {
 		accessTokenCache = new HashMap<>();
@@ -80,6 +84,18 @@ public class WeChatServiceImpl implements WeChatService {
 				MessageNews news = new MessageNews();
 				news.getItems().add(news.new Item("标题", "描述", "http://data.attachment.timetown.net/portal/201403/08/205957jotw0doi0twzt0dq.png", "http://stevenkang.tunnel.mobi/WeChat/"));
 				return news;
+			}
+			
+			// 根据数据库来查询
+			List<Map<String, Object>> datas = mysql.executeQuery("select content from test where ? like CONCAT('%',keywords,'%') limit 1", keywords);
+			if (datas.size() > 0) {
+				return new MessageText((String) datas.get(0).get("content"));
+			}
+			String sql = "select content from test where keywords = '"+keywords+"' limit 1";
+			System.out.println("sql: " + sql);
+			datas = mysql.executeQuery(sql);
+			if (datas.size() > 0) {
+				return new MessageText((String) datas.get(0).get("content"));
 			}
 		}
 		return null;

@@ -39,6 +39,7 @@
 
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+		<listener-class>net.timetown.wechat.util.MySQLHelper</listener-class>
 	</listener>
 	
 	<servlet-mapping>
