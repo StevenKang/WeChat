@@ -1,7 +1,6 @@
 package net.timetown.wechat.util;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -19,12 +18,6 @@ import net.timetown.wechat.wxbean.ClickButton;
 import net.timetown.wechat.wxbean.Menu;
 import net.timetown.wechat.wxbean.ViewButton;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,31 +38,7 @@ public class WeixinUtil {
 	public static String CREATE_MENU_TRL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN"; 
 	
 	// 获取access_token的接口地址（GET） 限200（次/天）   
-	public final static String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";  
-	
-	
-	public static JSONObject doGetStr(String url){
-	    DefaultHttpClient httpClient = new DefaultHttpClient();
-	    HttpGet httpGet = new HttpGet(url);
-	    
-		JSONObject jsonObject = null;
-		try {
-			HttpResponse response = httpClient.execute(httpGet);
-			HttpEntity entity = response.getEntity();
-			if(entity != null){
-				String result = EntityUtils.toString(entity,"UTF-8");
-				jsonObject = JSONObject.parseObject(result);
-			}
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return jsonObject;
-	}
-	
-	
+	public final static String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 	
 	
 	/** 
