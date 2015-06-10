@@ -43,35 +43,30 @@ public class MessageFactory {
 
 	public Message parseMessage(Document document) {
 
-		String fromUserName = document.getRootElement().element("FromUserName")
-				.getStringValue();
+		String fromUserName = document.getRootElement().element("FromUserName").getStringValue();
 		
-		String toUserName = document.getRootElement().element("ToUserName")
-				.getStringValue();
+		String toUserName = document.getRootElement().element("ToUserName").getStringValue();
 
-		String msgType = document.getRootElement().element("MsgType")
-				.getStringValue();
+		String msgType = document.getRootElement().element("MsgType").getStringValue();
 
-		Long createTime = Long.valueOf(document.getRootElement()
-				.element("CreateTime").getStringValue());
+		Long createTime = Long.valueOf(document.getRootElement().element("CreateTime").getStringValue());
 		
 		Long msgId = null;
 		if (!Message.MSGTYPE_EVENT.equals(msgType)) {
-			msgId = Long.valueOf(document.getRootElement()
-				.element("MsgId").getStringValue());
+			msgId = Long.valueOf(document.getRootElement().element("MsgId").getStringValue());
 		}
 		
 		if (Message.MSGTYPE_TEXT.equals(msgType)) {
 			//文本消息
-			String content = document.getRootElement().element("Content")
-					.getStringValue();
+			String content = document.getRootElement().element("Content").getStringValue();
 			MessageText message = new MessageText(content);
 			message.setToUserName(toUserName);
 			message.setFromUserName(fromUserName);
 			message.setCreateTime(createTime);
 			message.setMsgId(msgId);
+
+			System.err.println("MSGTYPE_TEXT...");
 			return message;
-			
 		} else if (Message.MSGTYPE_IMAGE.equals(msgType)) {
 			//图片消息
 			String picUrl = document.getRootElement().element("PicUrl")
@@ -156,4 +151,11 @@ public class MessageFactory {
 			throw new RuntimeException("不能解析为XML格式的消息类型：" + message.getMsgType());
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
 }

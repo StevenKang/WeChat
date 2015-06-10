@@ -35,7 +35,7 @@ public class ApiController {
 		System.out.println("GET");
 		try {
 			// 验证消息真实性
-			if (Util.checkSignature(signature, "token", timestamp, nonce)) {
+			if (Util.checkSignature(signature, timestamp, nonce)) {
 				return echostr;
 			}
 		} catch (Exception e) {
@@ -49,7 +49,7 @@ public class ApiController {
 			HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("POST");
 		// 验证消息真实性
-		if (Util.checkSignature(signature, "token", timestamp, nonce)) {
+		if (Util.checkSignature(signature, timestamp, nonce)) {
 			try {
 				SAXReader saxReader = new SAXReader();
 				Document document = saxReader.read(request.getInputStream());
@@ -78,4 +78,6 @@ public class ApiController {
 			}
 		}
 	}
+	
+	
 }
