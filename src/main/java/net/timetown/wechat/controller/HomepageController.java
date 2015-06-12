@@ -1,10 +1,12 @@
 package net.timetown.wechat.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.timetown.wechat.service.WeChatService;
@@ -13,6 +15,8 @@ import net.timetown.wechat.util.Util;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/")
@@ -36,5 +40,20 @@ public class HomepageController {
 		params.put("signature", signature);
 		model.addAttribute("params", params);
 		return "index";
+	}
+	
+	@RequestMapping(value = "test")
+	public void postTest(String key1, String key2, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("request.method: " + request.getMethod());
+		System.out.println("key1: " + key1);
+		System.out.println("key2: " + key2);
+		
+		response.getWriter().println("中文1");
+		response.getWriter().println("中\r\n文2");
+	}
+	
+	@RequestMapping("test2")
+	public void getTest2(HttpServletResponse response) throws IOException {
+		response.getWriter().printf("这里是第一行内容\r\n换行了哦。最后没有换行");
 	}
 }

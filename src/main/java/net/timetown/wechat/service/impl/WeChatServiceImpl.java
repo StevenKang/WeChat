@@ -112,7 +112,7 @@ public class WeChatServiceImpl implements WeChatService {
 			System.out.println("获取新的accessToken, appid: " + appid);
 			// 生成新的
 			String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
-			String response = HttpUtil.readContentFromGet(String.format(url, appid, secret));
+			String response = HttpUtil.get(String.format(url, appid, secret));
 			System.out.println(response);
 			
 			JSONObject json = JSONObject.parseObject(response);
@@ -139,7 +139,7 @@ public class WeChatServiceImpl implements WeChatService {
 			System.out.println("获取新的jsapiTicket, accessToken: " + accessToken);
 			// 生成新的
 			String url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi";
-			String response = HttpUtil.readContentFromGet(String.format(url, accessToken));
+			String response = HttpUtil.get(String.format(url, accessToken));
 			System.out.println(response);
 			
 			JSONObject json = JSONObject.parseObject(response);
